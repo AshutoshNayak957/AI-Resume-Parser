@@ -1,1 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Resume Parser</title>
 
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="wrapper">
+
+  <!-- TOP HERO SECTION -->
+  <div class="hero-info">
+    <div class="mini-badge">AI + NLP Powered Resume Screening</div>
+
+    <h1>Smart Resume <span>Parser</span></h1>
+
+    <p class="hero-sub">
+      Upload resumes and instantly extract structured candidate information
+      including skills, education, certifications, experience, and ATS score
+      using intelligent NLP-based parsing.
+    </p>
+
+    <div class="feature-points">
+      <span>✓ AI-Powered Parsing</span>
+      <span>✓ ATS Score Evaluation</span>
+      <span>✓ HR-Friendly Screening</span>
+    </div>
+  </div>
+
+
+  <!-- MAIN UPLOAD CARD -->
+  <form method="POST" enctype="multipart/form-data">
+    <div class="upload-card">
+
+      <label class="drop-zone" id="dropArea">
+        <div class="icon-wrap">📄</div>
+
+        <span class="drop-title">Drop your resume here</span>
+        <span class="drop-hint">or click to browse files</span>
+
+        <span class="file-name" id="fileName"></span>
+
+        <input
+          type="file"
+          name="resume"
+          id="fileInput"
+          accept=".pdf,.doc,.docx"
+          required
+        >
+      </label>
+
+      <div class="divider"></div>
+
+      <div class="card-footer">
+        <span class="formats">
+          Accepts <strong>PDF</strong>, <strong>DOC</strong>, <strong>DOCX</strong>
+        </span>
+
+        <button type="submit">Parse Resume →</button>
+      </div>
+    </div>
+  </form>
+
+
+  <!-- RESULTS -->
+  {% if data %}
+  <div class="results">
+
+    <p class="results-heading">Extracted Data</p>
+
+    <div class="result-row">
+      <span class="r-label">name</span>
+      <span class="r-value">{{ data.name }}</span>
+    </div>
+
+    <div class="result-row">
+      <span class="r-label">email</span>
+      <span class="r-value">{{ data.email | join(', ') }}</span>
+    </div>
+
+    <div class="result-row">
+      <span class="r-label">phone</span>
+      <span class="r-value">{{ data.phone | join(', ') }}</span>
+    </div>
+
+    <div class="result-row">
+      <span class="r-label">skills</span>
+      <span class="r-value">{{ data.skills | join(', ') }}</span>
+    </div>
+
+    <div class="result-row">
+      <span class="r-label">education</span>
+      <span class="r-value">{{ data.education | join(', ') }}</span>
+    </div>
+
+    <div class="result-row">
+      <span class="r-label">experience</span>
+      <span class="r-value">{{ data.experience | join(', ') }}</span>
+    </div>
+
+    <div class="result-row">
+      <span class="r-label">certificates</span>
+      <span class="r-value">{{ data.certificates | join(', ') }}</span>
+    </div>
+
+    <div class="result-row">
+      <span class="r-label">score</span>
+      <span class="r-value">{{ data.score }} / 100</span>
+    </div>
+
+    <div class="result-row">
+      <span class="r-label">status</span>
+      <span class="r-value">{{ data.recommendation }}</span>
+    </div>
+
+  </div>
+  {% endif %}
+
+
+  <!-- FOOTER -->
+  <div class="footer-note">
+    <p>
+      Designed for modern recruitment workflows • Built using Python, Flask, spaCy NLP & Machine Learning
+    </p>
+  </div>
+
+</div>
+
+
+<script>
+  const drop = document.getElementById("dropArea");
+  const input = document.getElementById("fileInput");
+  const name = document.getElementById("fileName");
+
+  input.addEventListener("change", () => {
+    if (input.files[0]) {
+      name.textContent = input.files[0].name;
+      name.style.display = "block";
+    }
+  });
+
+  drop.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    drop.classList.add("dragover");
+  });
+
+  drop.addEventListener("dragleave", () => {
+    drop.classList.remove("dragover");
+  });
+
+  drop.addEventListener("drop", (e) => {
+    e.preventDefault();
+    drop.classList.remove("dragover");
+
+    input.files = e.dataTransfer.files;
+
+    if (input.files[0]) {
+      name.textContent = input.files[0].name;
+      name.style.display = "block";
+    }
+  });
+</script>
+
+</body>
+</html>
