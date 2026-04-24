@@ -74,7 +74,7 @@ AI-Resume-Parser/
 
 Step 1: Clone the Repository 📥
 
-git clone https://github.com/your-username/AI-Resume-Parser.git
+git clone https://github.com/AshutoshNayak957/AI-Resume-Parser.git
 cd AI-Resume-Parser
 
 ---
@@ -184,7 +184,7 @@ Artificial Intelligence Intern 🤖
 Passionate about AI, Machine Learning, NLP, and Real-World Problem Solving 🚀
 
 🔗 GitHub: https://github.com/AshutoshNayak957
-🔗 LinkedIn: https://linkedin.com/in/your-linkedin-profile
+
 
 ---
 
