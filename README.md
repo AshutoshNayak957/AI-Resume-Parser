@@ -4,7 +4,7 @@ An AI-powered Resume Parser built using **Python, Flask, spaCy NLP, and PDF proc
 
 This project helps improve HR screening by reducing manual effort and providing structured candidate evaluation with **ATS-style scoring** 🎯.
 
----
+----
 
 ## ✨ Features
 
